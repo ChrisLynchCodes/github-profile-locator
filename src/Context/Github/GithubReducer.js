@@ -1,6 +1,9 @@
 
 export const GithubReducer = (state, action) => {
+
+ 
     switch(action.type){
+        
         case 'GET_USERS':
             return{
 
@@ -8,6 +11,11 @@ export const GithubReducer = (state, action) => {
                 users: action.payload,
                 loading: false
             }
+            case 'SET_LOADING':
+                return {
+                    ...state,
+                    loading: true
+                }
         default:
             return state;
     }
