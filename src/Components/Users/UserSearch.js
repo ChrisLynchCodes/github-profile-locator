@@ -6,7 +6,7 @@ import GithubContext from "../../Context/Github/GithubContext";
 export const UserSearch = () => {
 
     const [text, setText] = useState("");
-    const {users, searchUsers} = useContext(GithubContext);
+    const {users, searchUsers, clearUsers} = useContext(GithubContext);
 
 
     const handleSubmit = (event) => {
@@ -36,7 +36,7 @@ export const UserSearch = () => {
                 </form>
             </div>
             {users.length > 0 && (  <div >
-                <button className='btn btn-ghost btn-lrg'>Clear</button>
+                <button className='btn btn-ghost btn-lrg' onClick={clearUsers}>Clear</button>
                 </div>)}
           
         </div>

@@ -7,7 +7,7 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
 export const GithubProvider = ({ children }) => {
 
- 
+
 
     // Inital State
     const initialState = {
@@ -35,7 +35,7 @@ export const GithubProvider = ({ children }) => {
         })
 
         //Destructor the returned object to get the items array
-        const {items} = await response.json();
+        const { items } = await response.json();
 
         //Dispatch updates state passing the data from the api as a payload 
         dispatch({
@@ -45,10 +45,20 @@ export const GithubProvider = ({ children }) => {
         })
     }
 
-    //SetLoading
-    const SetLoading = () => dispatch({type: 'SET_LOADING'})
+    //Clear users from state
+    const clearUsers = () => {
+       
+        dispatch({
+            type: 'CLEAR_USERS',
+           
 
-    return <GithubContext.Provider value={{ users: state.users, loading: state.loading, searchUsers }}>
+        })
+    }
+
+    //SetLoading
+    const SetLoading = () => dispatch({ type: 'SET_LOADING' })
+
+    return <GithubContext.Provider value={{ users: state.users, loading: state.loading, searchUsers, clearUsers }}>
         {children}
     </GithubContext.Provider>
 }
