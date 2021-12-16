@@ -28,6 +28,7 @@ export const GithubProvider = ({ children }) => {
             q: text
         })
 
+        
         //Response
         const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
             headers: {
@@ -37,6 +38,7 @@ export const GithubProvider = ({ children }) => {
 
         //Destructor the returned object to get the items array
         const { items } = await response.json();
+     
 
         //Dispatch updates state passing the data from the api as a payload 
         dispatch({
