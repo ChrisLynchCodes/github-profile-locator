@@ -1,5 +1,5 @@
 
-export const GithubReducer = (state, action) => {
+export const githubReducer = (state, action) => {
 
  
     switch(action.type){

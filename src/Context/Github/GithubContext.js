@@ -1,5 +1,5 @@
 import { React, createContext, useReducer } from 'react'
-import { GithubReducer } from "./GithubReducer";
+import { githubReducer } from "./GithubReducer";
 
 const GithubContext = createContext();
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
@@ -16,7 +16,7 @@ export const GithubProvider = ({ children }) => {
 
     }
     //takes in the reducer we're using and the inital state
-    const [state, dispatch] = useReducer(GithubReducer, initialState)
+    const [state, dispatch] = useReducer(githubReducer, initialState)
 
     //Get search results
     const searchUsers = async (text) => {
