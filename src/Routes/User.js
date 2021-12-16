@@ -36,6 +36,8 @@ export const User = () => {
         return  <Spinner />
     }
     return (
+
+        // Individual User and profile details
         <>
         <div className='w-full mx-auto lg:w-10/12'>
           <div className='mb-4'>
