@@ -7,7 +7,7 @@
 
 ![Search](https://i.imgur.com/wssDdiN.png)
 ![SearchMe](https://i.imgur.com/hk40mX6.png)
-![Profile](https://i.imgur.com/IxXZLpf.png)
+![Profile](https://i.imgur.com/dbuaj3j.png)
 ![SearchBatman](https://i.imgur.com/A4JDWst.png)
 ![About](https://i.imgur.com/XKtBhGe.png)
 
