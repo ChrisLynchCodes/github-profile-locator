@@ -4,15 +4,26 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
 import GithubContext from '../Context/Github/GithubContext'
 import { Spinner } from "../Components/Layout/Spinner";
 import { RepoList } from '../Components/Repos/RepoList';
+import {  getUserRepos, getUser} from "../Context/Github/GithubActions";
 
 export const User = () => {
 
-  const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext)
+  const { user, dispatch, loading,  repos } = useContext(GithubContext)
   const params = useParams()
 
   useEffect(() => {
-    getUser(params.login)
-    getUserRepos(params.login)
+dispatch({type: 'SET_LOADING'})
+
+   const getUserData = async ()=> {
+      const userData = await getUser(params.login)
+      dispatch({type: 'GET_USER', payload: userData })
+
+      const userRepoData = await getUserRepos(params.login)
+      dispatch({type: 'GET_REPOS', payload: userRepoData })
+
+      
+   }
+   getUserData();
 
   }, [])
 
