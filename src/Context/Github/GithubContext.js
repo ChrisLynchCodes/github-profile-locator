@@ -21,34 +21,8 @@ export const GithubProvider = ({ children }) => {
     //takes in the reducer we're using and the inital state
     const [state, dispatch] = useReducer(githubReducer, initialState)
 
-    //Get search results
-    const searchUsers = async (text) => {
-        //Call SetLoading
-        SetLoading();
-
-        const params = new URLSearchParams({
-            q: text
-        })
-
-        
-        //Response
-        const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`
-            }
-        })
-
-        //Destructor the returned object to get the items array
-        const { items } = await response.json();
-     
-
-        //Dispatch updates state passing the data from the api as a payload 
-        dispatch({
-            type: 'GET_USERS',
-            payload: items,
-
-        })
-    }
+  
+  
 
     //Get a single user
     const getUser = async (login) => {
@@ -91,9 +65,9 @@ export const GithubProvider = ({ children }) => {
             per_page: 10
 
         })
-       
 
-        
+
+
         //Response
         const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`, {
             headers: {
@@ -103,7 +77,7 @@ export const GithubProvider = ({ children }) => {
 
         //Destructor the returned object to get the items array
         const data = await response.json();
-     
+
 
         //Dispatch updates state passing the data from the api as a payload 
         dispatch({
@@ -126,7 +100,13 @@ export const GithubProvider = ({ children }) => {
     //SetLoading
     const SetLoading = () => dispatch({ type: 'SET_LOADING' })
 
-    return <GithubContext.Provider value={{ users: state.users, loading: state.loading, user: state.user, repos:state.repos,  searchUsers, clearUsers, getUser, getUserRepos }}>
+    return <GithubContext.Provider value={{
+        ...state,
+        dispatch,
+        clearUsers,
+        getUser,
+        getUserRepos
+    }}>
         {children}
     </GithubContext.Provider>
 }
