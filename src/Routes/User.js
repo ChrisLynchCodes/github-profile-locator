@@ -25,7 +25,7 @@ dispatch({type: 'SET_LOADING'})
    }
    getUserData();
 
-  }, [])
+  }, [dispatch, params.login])
 
   const {
     name,
