@@ -4,27 +4,21 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
 import GithubContext from '../Context/Github/GithubContext'
 import { Spinner } from "../Components/Layout/Spinner";
 import { RepoList } from '../Components/Repos/RepoList';
-import {  getUserRepos, getUser} from "../Context/Github/GithubActions";
+import { getUserAndRepos } from "../Context/Github/GithubActions";
 
 export const User = () => {
 
-  const { user, dispatch, loading,  repos } = useContext(GithubContext)
+  const { user, dispatch, loading, repos } = useContext(GithubContext)
   const params = useParams()
 
   useEffect(() => {
-dispatch({type: 'SET_LOADING'})
+    dispatch({ type: 'SET_LOADING' })
+    const getUserData = async () => {
+      const userData = await getUserAndRepos(params.login)
+      dispatch({ type: 'GET_USER_AND_REPOS', payload: userData })
+    }
 
-   const getUserData = async ()=> {
-      const userData = await getUser(params.login)
-      dispatch({type: 'GET_USER', payload: userData })
-
-      const userRepoData = await getUserRepos(params.login)
-      dispatch({type: 'GET_REPOS', payload: userRepoData })
-
-      
-   }
-   getUserData();
-
+    getUserData()
   }, [dispatch, params.login])
 
   const {
@@ -162,8 +156,8 @@ dispatch({type: 'SET_LOADING'})
             </div>
             <div className='stat-value pr-5 text-3xl md:text-4xl'>{public_gists}</div>
           </div>
-          
-          
+
+
         </div>
         <RepoList repos={repos} />
       </div>
